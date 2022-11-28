@@ -1,5 +1,6 @@
 import './App.css';
 import ExpenseItem from './components/ExpenseItem';
+import Card from './components/Card';
 
 function App() {
   const expenses = [
@@ -23,11 +24,12 @@ function App() {
       date: new Date(2021, 5, 12),
     },
   ];
+
   return (
     <div className="App">
       {expenses.map(element => {
         console.log('I am tarun', element);
-        return <ExpenseItem title={element.title} amount={element.amount} date={element.date}/>
+        return <Card><ExpenseItem title={element.title} amount={element.amount} date={element.date}/></Card>
       })}
     </div>
   );
