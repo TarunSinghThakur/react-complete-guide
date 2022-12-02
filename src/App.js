@@ -1,5 +1,6 @@
 import './App.css';
 import ExpenseItem from './components/ExpenseItem';
+import NewExpense from './components/NewExpense/NewExpense';
 import Card from './components/Card';
 
 function App() {
@@ -27,8 +28,8 @@ function App() {
 
   return (
     <div className="App">
+      <NewExpense/>
       {expenses.map(element => {
-        console.log('I am tarun', element);
         return <Card><ExpenseItem title={element.title} amount={element.amount} date={element.date}/></Card>
       })}
     </div>
