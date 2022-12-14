@@ -1,9 +1,14 @@
+import React, { useState } from 'react';
+
 import './App.css';
 import ExpenseItem from './components/ExpenseItem';
 import NewExpense from './components/NewExpense/NewExpense';
+import ExpensesFilter from './components/ExpenseFilter/ExpensesFilter';
 import Card from './components/Card';
 
 function App() {
+  const [filterValue, setFilterValue] = useState('2020');
+
   const expenses = [
     {
       id: 'e1',
@@ -26,12 +31,27 @@ function App() {
     },
   ];
 
+  const addExpenseHandler = expense => {
+    console.log(expense, 'This is expense')
+  }
+  
+  const filterHandler = selectedFilter => {
+    console.log(selectedFilter, 'This is selectedFilter')
+    setFilterValue(selectedFilter);
+    console.log(filterValue, 'This is the filter selected')
+  }
+
   return (
     <div className="App">
-      <NewExpense/>
+      <NewExpense onAddExpense={addExpenseHandler}/>
+      <div className='Card'>
+      <ExpensesFilter onFilterChange={filterHandler} selected={filterValue}/>
       {expenses.map(element => {
-        return <Card><ExpenseItem title={element.title} amount={element.amount} date={element.date}/></Card>
+        return <Card>
+          <ExpenseItem title={element.title} amount={element.amount} date={element.date}/>
+          </Card>
       })}
+      </div>
     </div>
   );
 }
