@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 
 import './App.css';
-import ExpenseItem from './components/ExpenseItem';
 import NewExpense from './components/NewExpense/NewExpense';
 import ExpensesFilter from './components/ExpenseFilter/ExpensesFilter';
-import Card from './components/Card';
+import ExpensesList from './components/ExpenseFilter/ExpensesList';
 
 function App() {
   const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
@@ -17,21 +16,17 @@ function App() {
   }
   
   const filterHandler = selectedFilter => {
-    console.log(selectedFilter, 'This is selectedFilter')
     setFilterValue(selectedFilter);
-    console.log(filterValue, 'This is the filter selected')
   }
+
+  const filteredExpenses =  expenses.filter((expense) => expense.date.getFullYear().toString() === filterValue);
 
   return (
     <div className="App">
       <NewExpense onAddExpense={addExpenseHandler}/>
       <div className='Card'>
       <ExpensesFilter onFilterChange={filterHandler} selected={filterValue}/>
-      {expenses.map(element => {
-        return <Card>
-          <ExpenseItem title={element.title} amount={element.amount} date={element.date}/>
-          </Card>
-      })}
+      <ExpensesList filteredExpenses={filteredExpenses}/>
       </div>
     </div>
   );
