@@ -24,8 +24,6 @@ function App() {
     (expense) => expense.date.getFullYear().toString() === filterValue
   );
 
-  console.log(filteredExpenses, 'This is filteredExpenses');
-
   return (
     <div className="App">
       <NewExpense onAddExpense={addExpenseHandler} />
